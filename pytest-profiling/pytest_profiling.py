@@ -63,7 +63,7 @@ class Profiling(object):
             terminalreporter.write("SVG profile in {svg}.\n".format(svg=self.svg_name))
 
     @pytest.hookimpl(hookwrapper=True)
-    def pytest_runtest_call(self, item):
+    def pytest_runtest_protocol(self, item, nextitem):
         prof_filename = os.path.abspath(os.path.join("prof", clean_filename(item.name) + ".prof"))
         try:
             os.makedirs(os.path.dirname(prof_filename))
